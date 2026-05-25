@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="mdi:email-plus" clip-path="url(#clip0_54617_153)">
+<path id="Vector" d="M13 -809C13 -812.31 15.69 -815 19 -815C20.1 -815 21.12 -814.7 22 -814.19V-822C22 -822.53 21.7893 -823.039 21.4142 -823.414C21.0391 -823.789 20.5304 -824 20 -824H4C2.89 -824 2 -823.11 2 -822V-810C2 -809.47 2.21071 -808.961 2.58579 -808.586C2.96086 -808.211 3.46957 -808 4 -808H13.09C13.04 -808.33 13 -808.66 13 -809ZM4 -820V-822L12 -817L20 -822V-820L12 -815L4 -820ZM20 -813V-810H23V-808H20V-805H18V-808H15V-810H18V-813H20Z" fill="var(--fill-0, #0578B1)"/>
+</g>
+<defs>
+<clipPath id="clip0_54617_153">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>

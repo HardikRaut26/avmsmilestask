@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clear Aligners Landing Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind:wght@600;700&family=Poppins:wght@400;500;600;700&family=Graduate&family=Germania+One&family=Young+Serif&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="page-wrap">
+    <div class="page">
+      <!-- ═══ HERO SECTION ═══ -->
+      <section class="hero-image" aria-label="Hero">
+        <video autoplay muted loop playsinline poster="assets/hero-vid/poster.jpg">
+          <source src="assets/hero-vid/desktop_hero.mp4" type="video/mp4" />
+        </video>
+      </section>
+
+      <div class="section-bg-light abs" style="top: 7627px;"></div>
+      <div class="section-bg-light abs" style="top: 5577px; height: 565px;"></div>
+
+      <!-- ═══ FEATURES SECTION ═══ -->
+      <section aria-label="Features">
+        <h1 class="hind-36 center-title abs" style="top: 1118px; letter-spacing: -0.36px;">Clear Aligners Made for
+          Everyday Life</h1>
+        <h2 class="helv-28 center-subtitle abs visually-hidden-heading" style="top: 1207px;">A comfortable, step-by-step
+          aligner treatment designed to straighten your smile</h2>
+
+        <img class="feature-icon abs" style="top: 1351px; left: 326px; width: 50px; height: 50px;"
+          src="assets/figma/43330f50f96800a781184dccf712953258ce845c.png" alt="" />
+        <img class="feature-icon abs" style="top: 1351px; left: 1062px; width: 53px; height: 53px;"
+          src="assets/figma/193df54be3f49a5f4e52da675564256a6065ae72.png" alt="" />
+        <img class="feature-icon abs" style="top: 1620px; left: 693px; width: 53px; height: 53px;"
+          src="assets/figma/ef312a63ad8804b4052ac56cc4db0eb6d8749355.png" alt="" />
+
+        <p class="feature-title abs" style="top: 1450.5px; left: 350.5px; width: 177px;">Comfort You Can Live With</p>
+        <p class="feature-title feature-title-poppins abs" style="top: 1450.5px; left: 1088.5px; width: 231px;">
+          Expert-Planned, Fully Guided</p>
+        <p class="feature-title abs" style="top: 1721.5px; left: 719.5px; width: 227px;">Flexible Options for Every
+          Smile</p>
+
+        <p class="feature-desc abs" style="top: 1514px; left: 351px; width: 352px;">Smooth, removable aligners that let
+          you eat, speak, and smile naturally while your teeth gradually shift into place.</p>
+        <p class="feature-desc abs" style="top: 1513px; left: 1089px; width: 352px;">Every step is carefully planned
+          using digital scans to ensure safety, comfort, and confidence.</p>
+        <p class="feature-desc abs" style="top: 1784px; left: 720px; width: 352px;">Multiple aligner plans are
+          available, so you can choose what suits your dental needs, timeline, and budget.</p>
+
+        <div class="feature-card abs" id="free-visit-form" style="top: 1899px;"></div>
+        <h2 class="hind-36 center-title abs"
+          style="top: 1939px; width: 882px; letter-spacing: -0.36px; white-space: normal;">Offering Free
+          First Visit for Clear Aligners</h2>
+      </section>
+
+      <!-- ═══ LEAD FORM SECTION ═══ -->
+      <section aria-label="Contact Form">
+        <form class="abs" id="desktop-lead-form" style="top: 0; left: 0; width: 1440px; height: 0;">
+          <input class="input-box abs" style="top: 2021px; left: 218px; width: 316px;" type="text"
+            placeholder="First Name" aria-label="First Name" id="form-first-name" required />
+          <input class="input-box abs" style="top: 2021px; left: 562px; width: 316px;" type="text"
+            placeholder="Last Name" aria-label="Last Name" id="form-last-name" required />
+          <input class="input-box abs" style="top: 2021px; left: 906px; width: 316px;" type="text"
+            placeholder="PIN Code" aria-label="PIN Code" id="form-pin" inputmode="numeric" pattern="[0-9]{6}"
+            required />
+          <input class="input-box input-box-soft abs" style="top: 2109px; left: 218px; width: 485px;" type="email"
+            placeholder="Email ID" aria-label="Email ID" id="form-email" required />
+          <input class="input-box input-box-soft abs" style="top: 2109px; left: 737px; width: 485px;" type="tel"
+            placeholder="Contact Number" aria-label="Contact Number" id="form-phone" inputmode="tel" required />
+
+          <button class="cta-red cta-red-form abs" type="submit" style="top: 2196px; left: 557px; width: 326px;">
+            <span class="cta-red-form-text">Talk to an Aligner Expert</span>
+          </button>
+
+          <!-- Success / Error message -->
+          <p class="abs" id="form-msg"
+            style="top: 2260px; left: 557px; width: 326px; text-align: center; font-size: 14px; display: none;"></p>
+        </form>
+
+        <script>
+          (function () {
+            var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwvzaCRfBRpqctfJ86EKWwA53OV0O3yUQVFOa2-CGH1c9pGoBPn4eZTgyY24PWU2el4mA/exec';
+
+            function setupForm(config) {
+              var form = document.getElementById(config.formId);
+              if (!form) return;
+
+              var msg = document.getElementById(config.msgId);
+              var btn = form.querySelector('button[type="submit"]');
+              var btnText = btn.querySelector(config.btnTextSelector);
+              var rules = config.rules;
+              var fieldIds = config.fieldIds;
+
+              // Clear error styling on focus
+              fieldIds.forEach(function (id) {
+                var el = document.getElementById(id);
+                if (!el) return;
+                el.addEventListener('focus', function () {
+                  el.style.borderColor = '';
+                });
+              });
+
+              function validateField(id) {
+                var el = document.getElementById(id);
+                var val = el.value.trim();
+                var rule = rules[id];
+
+                if (!val) {
+                  el.style.borderColor = '#df2028';
+                  return 'Please fill in all fields';
+                }
+                if (!rule.test(val)) {
+                  el.style.borderColor = '#df2028';
+                  return rule.msg;
+                }
+                el.style.borderColor = '#28a745';
+                return null;
+              }
+
+              function showMsg(text, color) {
+                if (!msg) return;
+                msg.textContent = text;
+                msg.style.color = color;
+                msg.style.display = 'block';
+                setTimeout(function () { msg.style.display = 'none'; }, 5000);
+              }
+
+              form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Validate all fields
+                var firstErr = null;
+                fieldIds.forEach(function (id) {
+                  var err = validateField(id);
+                  if (err && !firstErr) firstErr = err;
+                });
+
+                if (firstErr) {
+                  showMsg(firstErr, '#df2028');
+                  return;
+                }
+
+                // Collect data
+                var data = {
+                  firstName: document.getElementById(fieldIds[0]).value.trim(),
+                  lastName: document.getElementById(fieldIds[1]).value.trim(),
+                  pin: document.getElementById(fieldIds[2]).value.trim(),
+                  email: document.getElementById(fieldIds[3]).value.trim(),
+                  phone: document.getElementById(fieldIds[4]).value.trim()
+                };
+
+                // Show loading
+                btnText.textContent = 'Submitting...';
+                btn.disabled = true;
+                btn.style.opacity = '0.7';
+
+                fetch(SHEET_URL, {
+                  method: 'POST',
+                  mode: 'no-cors',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(data)
+                })
+                  .then(function () {
+                    showMsg('✓ Thank you! We will contact you shortly.', '#28a745');
+                    form.reset();
+                    fieldIds.forEach(function (id) {
+                      document.getElementById(id).style.borderColor = '';
+                    });
+                  })
+                  .catch(function () {
+                    showMsg('Something went wrong. Please try again.', '#df2028');
+                  })
+                  .finally(function () {
+                    btnText.textContent = 'Talk to an Aligner Expert';
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                  });
+              });
+            }
+
+            function initForms() {
+              setupForm({
+                formId: 'desktop-lead-form',
+                msgId: 'form-msg',
+                btnTextSelector: '.cta-red-form-text',
+                fieldIds: ['form-first-name', 'form-last-name', 'form-pin', 'form-email', 'form-phone'],
+                rules: {
+                  'form-first-name': {
+                    test: function (v) { return /^[A-Za-z\s]{2,}$/.test(v); },
+                    msg: 'Enter a valid first name (letters only, min 2)'
+                  },
+                  'form-last-name': {
+                    test: function (v) { return /^[A-Za-z\s]{2,}$/.test(v); },
+                    msg: 'Enter a valid last name (letters only, min 2)'
+                  },
+                  'form-pin': {
+                    test: function (v) { return /^\d{6}$/.test(v); },
+                    msg: 'Enter a valid 6-digit PIN code'
+                  },
+                  'form-email': {
+                    test: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); },
+                    msg: 'Enter a valid email address'
+                  },
+                  'form-phone': {
+                    test: function (v) { return /^\d{10}$/.test(v); },
+                    msg: 'Enter a valid 10-digit phone number'
+                  }
+                }
+              });
+
+              setupForm({
+                formId: 'mobile-lead-form',
+                msgId: 'mobile-form-msg',
+                btnTextSelector: '.mobile-form-cta-text',
+                fieldIds: ['mob-form-first-name', 'mob-form-last-name', 'mob-form-pin', 'mob-form-email', 'mob-form-phone'],
+                rules: {
+                  'mob-form-first-name': {
+                    test: function (v) { return /^[A-Za-z\s]{2,}$/.test(v); },
+                    msg: 'Enter a valid first name (letters only, min 2)'
+                  },
+                  'mob-form-last-name': {
+                    test: function (v) { return /^[A-Za-z\s]{2,}$/.test(v); },
+                    msg: 'Enter a valid last name (letters only, min 2)'
+                  },
+                  'mob-form-pin': {
+                    test: function (v) { return /^\d{6}$/.test(v); },
+                    msg: 'Enter a valid 6-digit PIN code'
+                  },
+                  'mob-form-email': {
+                    test: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); },
+                    msg: 'Enter a valid email address'
+                  },
+                  'mob-form-phone': {
+                    test: function (v) { return /^\d{10}$/.test(v); },
+                    msg: 'Enter a valid 10-digit phone number'
+                  }
+                }
+              });
+            }
+
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', initForms);
+            } else {
+              initForms();
+            }
+          })();
+        </script>
+      </section>
+
+      <!-- ═══ TRANSFORMATIONS SECTION ═══ -->
+      <section aria-label="Transformations">
+        <h2 class="hind-36 abs"
+          style="top: 2483px; left: 175px; width: 436px; line-height: 1.4; letter-spacing: -0.36px; text-align: left;">
+          50k+ Real Aligners Transformation</h2>
+        <p class="hind-36 center-title abs" style="top: 2801px; letter-spacing: -0.36px;">Choose Orthosquare’s Discreet
+          Smile Correction</p>
+
+        <div class="stat-card abs" style="top: 2893px; left: 175px;"></div>
+        <div class="stat-card abs" style="top: 2893px; left: 557px;"></div>
+        <div class="stat-card abs" style="top: 2893px; left: 939px;"></div>
+        <div class="stat-card abs" style="top: 3106px; left: 176px;"></div>
+        <div class="stat-card abs" style="top: 3106px; left: 558px;"></div>
+        <div class="stat-card abs" style="top: 3106px; left: 940px;"></div>
+
+        <div class="stat-line abs" style="top: 2916px; left: 236px;"></div>
+        <div class="stat-line abs" style="top: 3130px; left: 237px;"></div>
+        <div class="stat-line abs" style="top: 2916px; left: 618px;"></div>
+        <div class="stat-line abs" style="top: 3130px; left: 618px;"></div>
+        <div class="stat-line abs" style="top: 2916px; left: 1000px;"></div>
+        <div class="stat-line abs" style="top: 3130px; left: 1001px;"></div>
+
+        <img class="icon abs" style="top: 2919px; left: 185px;"
+          src="assets/figma/7030864d5f19006a640cb9fe0acbfe92b57a5143.png" alt="" />
+        <img class="icon abs" style="top: 2921px; left: 572px; width: 34px; height: 34px;"
+          src="assets/figma/1e98f4d725ef0f54e02c062a4049617be4a99313.svg" alt="" />
+        <img class="icon abs" style="top: 2927px; left: 961px; width: 30px; height: 30px;"
+          src="assets/figma/0828951c9832a33df632bb1a324d0a4eb495b14a.png" alt="" />
+        <img class="icon abs" style="top: 3136px; left: 572px; width: 39px; height: 39px;"
+          src="assets/figma/33bec78dd3ed2d39f546d352ba69e340ec09b1de.svg" alt="" />
+        <img class="icon abs" style="top: 3138px; left: 962px; width: 32px; height: 32px;"
+          src="assets/figma/c42f52be1bec244e14afd6b4226c947b906d9c53.svg" alt="" />
+        <img class="icon abs" style="top: 3141px; left: 195px; width: 27px; height: 27px;"
+          src="assets/figma/f5d47f2e13fee8fe6e8cde097400a45e6377300b.svg" alt="" />
+
+        <p class="stat-title abs" style="top: 2942.5px; left: 247px;">Discreet &amp; Almost Invisible</p>
+        <p class="stat-body abs" style="top: 3023px; left: 195px;">Clear aligners that straighten your teeth quietly -
+          no metal, no wires, no attention.</p>
+
+        <p class="stat-title abs" style="top: 2942.5px; left: 629px;">Easy EMI Options Available</p>
+        <p class="stat-body abs" style="top: 3023px; left: 575px;">Straighten your teeth without financial stress, easy
+          monthly payment plans available.</p>
+
+        <p class="stat-title abs" style="top: 2942.5px; left: 1011px;">Designed for Everyday Life</p>
+        <p class="stat-body abs" style="top: 3023px; left: 955px;">Remove them easily for meals, meetings, brushing, or
+          special occasions.</p>
+
+        <p class="stat-title abs" style="top: 3156.5px; left: 249px;">Painless, Guided Procedure</p>
+        <p class="stat-body abs" style="top: 3237px; left: 196px;">Computer-assisted techniques ensure a comfortable,
+          minimally invasive experience.</p>
+
+        <p class="stat-title abs" style="top: 3156.5px; left: 629px;">Personalised to Your Smile</p>
+        <p class="stat-body abs" style="top: 3237px; left: 575px; width: 261px;">Aligners designed around your teeth,
+          your goals, and your daily routine.</p>
+
+        <p class="stat-title abs" style="top: 3156.5px; left: 1012px;">Regular Progress Monitoring</p>
+        <p class="stat-body abs" style="top: 3237px; left: 956px;">Your aligner journey is tracked at every stage to
+          keep results on time and on track.</p>
+
+        <div class="cta-strip abs" style="top: 3387px;"></div>
+        <p class="cta-strip-title cta-strip-title-centered abs" style="top: 3459.5px; left: 224px;">Quality Clear
+          Aligners at Low Price</p>
+        <button class="cta-red cta-red-strip abs" style="top: 3435px; left: 880px; width: 354px; cursor:pointer;"
+          onclick="document.getElementById('free-visit-form').scrollIntoView({behavior:'smooth',block:'center'})">
+          <span>Download Costing Details</span>
+        </button>
+
+      </section>
+
+      <!-- ═══ TESTIMONIAL CAROUSEL SECTION ═══ -->
+      <section aria-label="Before After Results">
+        <h2 class="hind-36 abs"
+          style="top: 3706px; left: 175px; width: 419px; line-height: 1.4; letter-spacing: -0.36px; text-align: left;">
+          See How Clear Aligners Changed Lives</h2>
+
+        <!-- Top carousel: 50k+ Transformations -->
+        <div class="slider-carousel abs" style="top: 2409px; left: 632px;" data-slider="top">
+          <div class="slider-carousel__track">
+            <div class="slider-carousel__slide" style="background-image: url('assets/figma-carousel/base1.png')"></div>
+            <div class="slider-carousel__slide" style="background-image: url('assets/figma-carousel/base2.png')"></div>
+            <div class="slider-carousel__slide" style="background-image: url('assets/figma-carousel/aab1.png')"></div>
+            <div class="slider-carousel__slide" style="background-image: url('assets/figma-carousel/aab2.png')"></div>
+            <div class="slider-carousel__slide" style="background-image: url('assets/figma-carousel/aab3.png')"></div>
+            <div class="slider-carousel__slide" style="background-image: url('assets/figma-carousel/aab4.png')"></div>
+            <div class="slider-carousel__slide" style="background-image: url('assets/figma-carousel/aab5.png')"></div>
+          </div>
+        </div>
+
+        <!-- Bottom carousel: Changed Lives (YouTube Videos) -->
+        <div class="slider-carousel slider-carousel--video abs" style="top: 3620px; left: 632px;" data-slider="bottom">
+          <div class="slider-carousel__track">
+            <div class="slider-carousel__slide slider-carousel__slide--video"
+              style="background-image: url('https://img.youtube.com/vi/oHsEwYx5L4w/hqdefault.jpg')"
+              onclick="window.open('https://www.youtube.com/watch?v=oHsEwYx5L4w','_blank')">
+              <div class="yt-play-btn"></div>
+            </div>
+            <div class="slider-carousel__slide slider-carousel__slide--video"
+              style="background-image: url('https://img.youtube.com/vi/K6-HEJ-OkJ8/hqdefault.jpg')"
+              onclick="window.open('https://www.youtube.com/shorts/K6-HEJ-OkJ8','_blank')">
+              <div class="yt-play-btn"></div>
+            </div>
+            <div class="slider-carousel__slide slider-carousel__slide--video"
+              style="background-image: url('https://img.youtube.com/vi/iqbGYxB0KlE/hqdefault.jpg')"
+              onclick="window.open('https://www.youtube.com/shorts/iqbGYxB0KlE','_blank')">
+              <div class="yt-play-btn"></div>
+            </div>
+            <div class="slider-carousel__slide slider-carousel__slide--video"
+              style="background-image: url('https://img.youtube.com/vi/6JmvrsITMZc/hqdefault.jpg')"
+              onclick="window.open('https://www.youtube.com/shorts/6JmvrsITMZc','_blank')">
+              <div class="yt-play-btn"></div>
+            </div>
+            <div class="slider-carousel__slide slider-carousel__slide--video"
+              style="background-image: url('https://img.youtube.com/vi/vUioINdiY5Q/hqdefault.jpg')"
+              onclick="window.open('https://www.youtube.com/shorts/vUioINdiY5Q','_blank')">
+              <div class="yt-play-btn"></div>
+            </div>
+            <div class="slider-carousel__slide slider-carousel__slide--video"
+              style="background-image: url('https://img.youtube.com/vi/mOvM0pcyPBc/hqdefault.jpg')"
+              onclick="window.open('https://www.youtube.com/shorts/mOvM0pcyPBc','_blank')">
+              <div class="yt-play-btn"></div>
+            </div>
+            <div class="slider-carousel__slide slider-carousel__slide--video"
+              style="background-image: url('https://img.youtube.com/vi/tGXou-fW2t4/hqdefault.jpg')"
+              onclick="window.open('https://www.youtube.com/shorts/tGXou-fW2t4','_blank')">
+              <div class="yt-play-btn"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-dot abs" style="top: 2679px; left: 1165px;"></div>
+        <div class="carousel-dot abs" style="top: 2679px; left: 1228px;"></div>
+        <div class="carousel-dot abs" style="top: 3887px; left: 1165px;"></div>
+        <div class="carousel-dot abs" style="top: 3887px; left: 1228px;"></div>
+
+        <img class="arrow carousel-arrow abs" data-slider-arrow="top" data-direction="prev"
+          style="top: 2689px; left: 1175px;" src="assets/figma/f0505f9478110be142f2e8fd20ae65f498d24774.svg" alt="" />
+        <img class="arrow carousel-arrow abs" data-slider-arrow="bottom" data-direction="prev"
+          style="top: 3897px; left: 1175px;" src="assets/figma/f0505f9478110be142f2e8fd20ae65f498d24774.svg" alt="" />
+        <img class="arrow carousel-arrow abs" data-slider-arrow="top" data-direction="next"
+          style="top: 2689px; left: 1238px; transform: rotate(180deg);"
+          src="assets/figma/7d01fc3c8e9ffb829eabfc39601e4191650c9450.svg" alt="" />
+        <img class="arrow carousel-arrow abs" data-slider-arrow="bottom" data-direction="next"
+          style="top: 3897px; left: 1238px; transform: rotate(180deg);"
+          src="assets/figma/7d01fc3c8e9ffb829eabfc39601e4191650c9450.svg" alt="" />
+
+      </section>
+
+      <!-- ═══ SMILE PROBLEMS SECTION ═══ -->
+      <section aria-label="Smile Problems">
+        <h2 class="hind-36 center-title abs"
+          style="top: 4000px; width: 935px; line-height: 1.15; letter-spacing: -0.36px; white-space: normal;">Smile
+          Problems Clear Aligners
+          Can Fix</h2>
+
+        <div class="solution-card abs"
+          style="top: 4132px; left: 175px; background-image: url('assets/smile-problems/solution1.png');"></div>
+        <div class="solution-card abs"
+          style="top: 4132px; left: 554px; background-image: url('assets/smile-problems/solution2.png');"></div>
+        <div class="solution-card abs"
+          style="top: 4132px; left: 933px; background-image: url('assets/smile-problems/solution3.png');"></div>
+
+        <p class="solution-title smile-title abs" style="top: 4105.5px; left: 175px; width: 331px;">Crowded Teeth</p>
+        <p class="solution-title smile-title abs" style="top: 4105.5px; left: 554px; width: 331px;">Crossbite</p>
+        <p class="solution-title smile-title abs" style="top: 4105.5px; left: 933px; width: 331px;">Gapped Teeth</p>
+
+        <p class="solution-body smile-body abs" style="top: 4340px; left: 175px;">When teeth look pushed together,
+          overlap, or feel difficult to clean properly.</p>
+        <p class="solution-body smile-body abs" style="top: 4340px; left: 554px;">When some upper teeth sit inside or
+          behind the lower teeth while biting.</p>
+        <p class="solution-body smile-body abs" style="top: 4340px; left: 933px;">When there are noticeable gaps between
+          teeth that make the smile feel incomplete.</p>
+
+        <div class="pill-bg abs" style="top: 4391px; left: 175px; width: 83px;"></div>
+        <div class="pill-bg abs" style="top: 4391px; left: 267px; width: 101px;"></div>
+        <div class="pill-bg abs" style="top: 4391px; left: 554px; width: 83px;"></div>
+        <div class="pill-bg abs" style="top: 4391px; left: 646px; width: 101px;"></div>
+        <div class="pill-bg abs" style="top: 4391px; left: 933px; width: 83px;"></div>
+        <div class="pill-bg abs" style="top: 4391px; left: 1025px; width: 101px;"></div>
+
+        <p class="pill-text abs" style="top: 4404.5px; left: 216.5px; width: 67px;">Too close</p>
+        <p class="pill-text abs" style="top: 4404.5px; left: 317.5px; width: 85px;">Overlapping</p>
+        <p class="pill-text abs" style="top: 4404.5px; left: 595.5px; width: 83px;">Misaligned</p>
+        <p class="pill-text abs" style="top: 4404.5px; left: 696.5px; width: 85px;">Uneven Bite</p>
+        <p class="pill-text abs" style="top: 4404.5px; left: 974.5px; width: 67px;">Gaps</p>
+        <p class="pill-text abs" style="top: 4404.5px; left: 1075.5px; width: 85px;">Spaces</p>
+
+        <div class="solution-card solution-card-strong abs"
+          style="top: 4525px; left: 364px; background-image: url('assets/smile-problems/solution4.png');"></div>
+        <div class="solution-card abs"
+          style="top: 4525px; left: 747px; background-image: url('assets/smile-problems/solution5.png');"></div>
+
+        <p class="solution-title smile-title abs" style="top: 4499.5px; left: 364px; width: 331px;">Open / Deep Bite</p>
+        <p class="solution-title smile-title abs" style="top: 4499.5px; left: 744px; width: 331px;">Spacing Issues</p>
+        <p class="solution-body smile-body abs" style="top: 4734px; left: 364px;">When front teeth don't meet properly
+          or cover too much when you close your mouth.</p>
+        <p class="solution-body smile-body abs" style="top: 4734px; left: 744px;">When teeth are unevenly spaced and the
+          smile looks irregular or unbalanced.</p>
+
+        <div class="pill-bg abs" style="top: 4785px; left: 364px; width: 83px;"></div>
+        <div class="pill-bg abs" style="top: 4785px; left: 456px; width: 101px;"></div>
+        <div class="pill-bg abs" style="top: 4785px; left: 744px; width: 83px;"></div>
+        <div class="pill-bg abs" style="top: 4785px; left: 836px; width: 101px;"></div>
+
+        <p class="pill-text abs" style="top: 4798.5px; left: 405.5px; width: 67px;">Overbite</p>
+        <p class="pill-text abs" style="top: 4798.5px; left: 506.5px; width: 85px;">Teeth Gaps</p>
+        <p class="pill-text abs" style="top: 4798.5px; left: 785.5px; width: 67px;">Uneven</p>
+        <p class="pill-text abs" style="top: 4798.5px; left: 886.5px; width: 97px;">Irregular Gap</p>
+
+
+        <div class="cta-strip abs" style="top: 4901px;"></div>
+        <p class="cta-strip-title cta-strip-title-centered abs" style="top: 4973.5px; left: 224px;">Looking to get a
+          perfect smile? Your first visit is on us, start now</p>
+        <button class="cta-red cta-red-strip abs" style="top: 4949px; left: 880px; width: 354px; cursor:pointer;"
+          onclick="document.getElementById('free-visit-form').scrollIntoView({behavior:'smooth',block:'center'})">
+          <span class="cta-red-strip-text">Begin Free Assessment</span>
+        </button>
+      </section>
+
+      <!-- ═══ REVIEWS SECTION ═══ -->
+      <section aria-label="Patient Reviews">
+        <h2 class="hind-36 center-title abs" style="top: 5113px;">Your Trust, Our Biggest Achievement</h2>
+
+        <div class="review-carousel abs" style="top: 5191px; left: 175px;" data-slider="reviews" data-card-w="330"
+          data-gap="50" data-visible="3">
+          <div class="slider-carousel__track">
+            <!-- Card 1: Pramila Tandkar -->
+            <div class="review-slide">
+              <div class="review-slide__card">
+                <img class="review-slide__quote" src="assets/reviews/quote.svg" alt="" />
+                <div class="review-slide__text">Came here for my aligners and implant treatment. Service here is good.
+                  Staff is co-operative. Satisfied with my treatment.</div>
+              </div>
+              <div class="review-slide__footer">
+                <img class="review-slide__avatar" src="assets/figma/362b2d1f1cda6770e585c901bed7742f1e337545.svg"
+                  alt="" />
+                <span class="review-slide__name">Pramila Tandkar</span>
+              </div>
+            </div>
+
+            <!-- Card 2: Miloni Joshi -->
+            <div class="review-slide">
+              <div class="review-slide__card">
+                <img class="review-slide__quote" src="assets/reviews/quote.svg" alt="" />
+                <div class="review-slide__text">I had a great experience at Orthosquare for my aligner treatment. It was
+                  led by Dr Isha throughout and she is a very sweet and understanding doctor. She will explain
+                  everything in detail and will always be available for any queries. Dr Vidisha also performed composite
+                  treatment for me at the end and it turned out very well.</div>
+              </div>
+              <div class="review-slide__footer">
+                <img class="review-slide__avatar" src="assets/figma/362b2d1f1cda6770e585c901bed7742f1e337545.svg"
+                  alt="" />
+                <span class="review-slide__name">Miloni Joshi</span>
+              </div>
+            </div>
+
+            <!-- Card 3: Shriyani Datta -->
+            <div class="review-slide">
+              <div class="review-slide__card">
+                <img class="review-slide__quote" src="assets/reviews/quote.svg" alt="" />
+                <div class="review-slide__text">Got my Invisalign treatment done with Dr. Rathi. Took longer than usual
+                  because I was stuck in a different place because of the pandemic. The staff was very helpful in
+                  coordinating with me from a different city (even got my retainer set couriered remotely). Excellent
+                  service and very happy with the results from Dr. Rathi!</div>
+              </div>
+              <div class="review-slide__footer">
+                <img class="review-slide__avatar" src="assets/figma/362b2d1f1cda6770e585c901bed7742f1e337545.svg"
+                  alt="" />
+                <span class="review-slide__name">Shriyani Datta</span>
+              </div>
+            </div>
+
+            <!-- Card 4: Anoop Thomas -->
+            <div class="review-slide">
+              <div class="review-slide__card">
+                <img class="review-slide__quote" src="assets/reviews/quote.svg" alt="" />
+                <div class="review-slide__text">Absolutely loved the experience with Dr. Ridhi and her team. They have
+                  helped and guided me tremendously with my teeth alignment. The services and ambience provided by each
+                  at orthosquare clinic made the entire experience a lovely one. Thank you all.</div>
+              </div>
+              <div class="review-slide__footer">
+                <img class="review-slide__avatar" src="assets/figma/362b2d1f1cda6770e585c901bed7742f1e337545.svg"
+                  alt="" />
+                <span class="review-slide__name">Anoop Thomas</span>
+              </div>
+            </div>
+
+            <!-- Card 5: Mahesh Kadam -->
+            <div class="review-slide">
+              <div class="review-slide__card">
+                <img class="review-slide__quote" src="assets/reviews/quote.svg" alt="" />
+                <div class="review-slide__text">Came here for my aligner treatment. I am satisfied with it. Orthosquare
+                  recommended for aligners.</div>
+              </div>
+              <div class="review-slide__footer">
+                <img class="review-slide__avatar" src="assets/figma/362b2d1f1cda6770e585c901bed7742f1e337545.svg"
+                  alt="" />
+                <span class="review-slide__name">Mahesh Kadam</span>
+              </div>
+            </div>
+
+            <!-- Card 6: Trevor Baretto -->
+            <div class="review-slide">
+              <div class="review-slide__card">
+                <img class="review-slide__quote" src="assets/reviews/quote.svg" alt="" />
+                <div class="review-slide__text">Very professional and completed my dental implant and aligners treatment
+                  without much pain.</div>
+              </div>
+              <div class="review-slide__footer">
+                <img class="review-slide__avatar" src="assets/figma/362b2d1f1cda6770e585c901bed7742f1e337545.svg"
+                  alt="" />
+                <span class="review-slide__name">Trevor Baretto</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review arrows -->
+        <img class="arrow carousel-arrow abs" data-slider-arrow="reviews" data-direction="prev"
+          style="top: 5490px; left: 670px;" src="assets/figma/f0505f9478110be142f2e8fd20ae65f498d24774.svg" alt="" />
+        <img class="arrow carousel-arrow abs" data-slider-arrow="reviews" data-direction="next"
+          style="top: 5490px; left: 733px; transform: rotate(180deg);"
+          src="assets/figma/7d01fc3c8e9ffb829eabfc39601e4191650c9450.svg" alt="" />
+      </section>
+
+      <!-- ═══ STEPS SECTION ═══ -->
+      <section aria-label="Steps to Straighter Smile">
+        <img class="abs" style="top: 5609px; left: 137px; width: 565px; height: 565px;"
+          src="assets/straighter-smile/woman.png" alt="Woman with aligners" />
+
+        <h2 class="hind-36 straighter-title abs" style="top: 5672px; left: 792px; width: 433px; text-align: left;">A
+          Straighter Smile is Just a Few Step Away !</h2>
+        <p class="helv-20 straighter-subtitle abs" style="top: 5746px; left: 804px; width: 505px;">Clear guidance,
+          gentle care, and a smooth journey to a confident smile starting today.</p>
+
+        <div class="step-badge step-badge-red abs" style="top: 5800px; left: 784px; width: 31.759px; height: 31.759px;">
+          1</div>
+        <p class="helv-20 title-blue straighter-step-title abs" style="top: 5813.5px; left: 828px; width: 346px;">Get
+          Free Consultation &amp; Digital Scans</p>
+        <p class="helv-18 straighter-step-desc abs" style="top: 5854.5px; left: 828px; width: 461px;">Meet our
+          specialists, share your smile goals, and get a precise digital scan to plan your aligner journey.</p>
+
+        <div class="step-badge step-badge-red abs" style="top: 5903px; left: 784px; width: 32px; height: 32px;">2</div>
+        <p class="helv-20 title-blue straighter-step-title abs" style="top: 5918.5px; left: 828px; width: 275px;">Wear
+          Your Clear Aligners</p>
+        <p class="helv-18 straighter-step-desc abs" style="top: 5958.5px; left: 828px; width: 461px;">Receive
+          custom-made, invisible aligners that gently straighten your teeth while fitting into your daily routine.</p>
+
+        <div class="step-badge step-badge-red abs" style="top: 6012px; left: 784px; width: 32px; height: 32px;">3</div>
+        <p class="helv-20 title-blue straighter-step-title abs" style="top: 6027.5px; left: 828px; width: 253px;">Smile
+          with Confidence</p>
+        <p class="helv-18 straighter-step-desc abs" style="top: 6065.5px; left: 828px; width: 461px;">As your teeth move
+          into place, enjoy visible progress and a naturally straighter smile.</p>
+
+        <div class="cta-banner abs" style="top: 6140px;"></div>
+        <p class="cta-banner-text cta-banner-text-centered abs" style="top: 6178px;">Get the smile you always wished
+          for, talk to our experts now at NO COST</p>
+        <button class="cta-outline abs" style="top: 6154px; left: 1111px;">Book Now</button>
+      </section>
+
+      <!-- ═══ DENTAL CONCERNS SECTION ═══ -->
+      <section aria-label="Dental Concerns">
+        <h2 class="hind-36 center-title abs" style="top: 6301px; letter-spacing: -0.36px;">Your Dental Concerns, Solved
+          Simply</h2>
+        <div class="tab-outline abs" style="top: 6395px; left: 175px;">What You Feel</div>
+        <div class="tab-filled abs" style="top: 6395px; left: 817px;">How Aligners Help</div>
+
+        <div class="info-card abs" style="top: 6461px; left: 175px;"></div>
+        <div class="info-card abs" style="top: 6461px; left: 817px;"></div>
+
+        <img class="hand-icon abs" style="top: 6491px; left: 209px;" src="assets/dental-concerns/hand-left.svg"
+          alt="" />
+        <img class="hand-icon abs" style="top: 6531px; left: 209px;" src="assets/dental-concerns/hand-left.svg"
+          alt="" />
+        <img class="hand-icon abs" style="top: 6571px; left: 209px;" src="assets/dental-concerns/hand-left.svg"
+          alt="" />
+        <img class="hand-icon abs" style="top: 6611px; left: 209px;" src="assets/dental-concerns/hand-left.svg"
+          alt="" />
+        <img class="hand-icon abs" style="top: 6651px; left: 209px;" src="assets/dental-concerns/hand-left.svg"
+          alt="" />
+
+        <p class="list-text abs" style="top: 6503.5px; left: 239px;">Conscious about smiling</p>
+        <p class="list-text abs" style="top: 6543.5px; left: 239px;">Crooked or uneven teeth</p>
+        <p class="list-text abs" style="top: 6583.5px; left: 239px;">Don't want visible braces</p>
+        <p class="list-text abs" style="top: 6623.5px; left: 239px;">Discomfort while talking</p>
+        <p class="list-text abs" style="top: 6663.5px; left: 239px;">Gradual, visible improvement</p>
+
+        <img class="hand-icon abs" style="top: 6491px; left: 851px;" src="assets/dental-concerns/hand-right.svg"
+          alt="" />
+        <img class="hand-icon abs" style="top: 6531px; left: 851px;" src="assets/dental-concerns/hand-right.svg"
+          alt="" />
+        <img class="hand-icon abs" style="top: 6571px; left: 851px;" src="assets/dental-concerns/hand-right.svg"
+          alt="" />
+        <img class="hand-icon abs" style="top: 6611px; left: 851px;" src="assets/dental-concerns/hand-right.svg"
+          alt="" />
+        <img class="hand-icon abs" style="top: 6651px; left: 851px;" src="assets/dental-concerns/hand-right.svg"
+          alt="" />
+
+        <p class="list-text abs" style="top: 6503.5px; left: 881px;">Nearly invisible while you wear</p>
+        <p class="list-text abs" style="top: 6543.5px; left: 881px;">Comfortable for everyday life</p>
+        <p class="list-text abs" style="top: 6583.5px; left: 881px;">Removable for eating &amp; brushing</p>
+        <p class="list-text abs" style="top: 6623.5px; left: 881px;">A natural-looking, confident smile</p>
+        <p class="list-text abs" style="top: 6663.5px; left: 881px;">High Success &amp; Full Safety</p>
+
+        <div class="abs dental-hline-wrap" style="top: 6503px; left: 623px; width: 28px;" aria-hidden="true">
+          <img class="dental-hline-img" src="assets/dental-concerns/line1.svg" alt="" />
+        </div>
+        <div class="abs dental-hline-wrap" style="top: 6620px; left: 741px; width: 76px;" aria-hidden="true">
+          <img class="dental-hline-img" src="assets/dental-concerns/line2.svg" alt="" />
+        </div>
+        <div class="abs dental-line3-wrap" style="top: 6503.07px; left: 695.89px;">
+          <div class="dental-line3-rotate">
+            <img class="dental-line3-img" src="assets/dental-concerns/line3.svg" alt="" />
+          </div>
+        </div>
+
+        <div class="cta-strip abs" style="top: 6775px;"></div>
+        <p class="cta-strip-title cta-strip-title-centered abs" style="top: 6847.5px; left: 224px;">Start With a Free
+          Expert 3D Scanning</p>
+        <button class="cta-red cta-red-strip abs" style="top: 6823px; left: 880px; width: 354px; cursor:pointer;"
+          onclick="document.getElementById('free-visit-form').scrollIntoView({behavior:'smooth',block:'center'})">
+          <span class="cta-red-strip-text">Schedule Free Visit</span>
+        </button>
+      </section>
+
+      <!-- ═══ RECOGNIZED SECTION ═══ -->
+      <section aria-label="Awards and Recognition">
+        <h2 class="hind-46 recognized-title abs" style="top: 7154px; left: 598px; width: 684px;">Recognized For
+          Exceptional Dental Expertise</h2>
+        <div class="abs recognized-wave" style="top: 6896px; left: -98px; width: 745px; height: 745px;"
+          aria-hidden="true">
+          <img class="recognized-wave-img" src="assets/figma/a58328665aca2edf691d6c69e2ca0fc0025d4ccf.png" alt="" />
+        </div>
+        <div class="abs recognized-ellipse" style="top: 7144px; left: 173px; width: 303px; height: 303px;"
+          aria-hidden="true">
+          <img class="recognized-ellipse-img" src="assets/recognized/ellipse6-figma.svg" alt="" />
+        </div>
+        <div class="abs recognized-award" style="top: 7165px; left: 90px; width: 464px; height: 253px;"
+          aria-hidden="true">
+          <div class="recognized-award-layer">
+            <div class="recognized-award-clip">
+              <img class="recognized-award-clip-img" src="assets/recognized/award-figma.png" alt="" />
+            </div>
+            <img class="recognized-award-img" src="assets/recognized/award-figma.png" alt="" />
+          </div>
+        </div>
+
+        <p class="helv-24 recognized-subtitle abs" style="top: 7288px; left: 595px; width: 686px;">Leading Dental Chain
+          of the Year - West</p>
+        <p class="helv-20 recognized-body abs" style="top: 7375px; left: 597px; width: 616px;">This recognition reflects
+          our commitment to consistent, high-quality dental care across the nation. With experienced specialists,
+          advanced technology, and transparent practices, we continue to earn the trust of thousands of patients every
+          year.</p>
+
+      </section>
+
+      <!-- ═══ FAQ SECTION ═══ -->
+      <section aria-label="Frequently Asked Questions">
+        <h2 class="hind-36 abs" style="top: 7660px; left: 170px; width: 740px;">Got Doubts ?</h2>
+        <p class="helv-34 abs" style="top: 7701px; left: 170px; width: 740px;">We've Got All Answers</p>
+
+        <div class="faq-card abs" style="top: 7778px; left: 175px; width: 646px; height: 112px;"></div>
+        <div class="faq-card abs" style="top: 7910px; left: 175px; width: 646px; height: 112px;"></div>
+        <div class="faq-card abs" style="top: 8042px; left: 175px; width: 646px; height: 64px;"></div>
+        <div class="faq-card abs" style="top: 8126px; left: 175px; width: 646px; height: 64px;"></div>
+        <div class="faq-card abs" style="top: 8210px; left: 175px; width: 646px; height: 64px;"></div>
+
+        <p class="faq-question faq-q abs" style="top: 7810.5px; left: 200px;">Are clear aligners painful?</p>
+        <p class="faq-answer faq-a abs" style="top: 7847.5px; left: 200px;">Aligners may cause mild pressure for a day
+          or two when you switch to a new set, which means they're working.</p>
+        <p class="faq-question faq-q abs" style="top: 7942.5px; left: 200px;">How long does aligner treatment take?</p>
+        <p class="faq-answer faq-a abs" style="top: 7979.5px; left: 200px; width: 541px;">Treatment time varies based on
+          your case, you see noticeable results within a few months, with full treatment typically lasting 6-12 months.
+        </p>
+        <p class="faq-question faq-q abs" style="top: 8073.5px; left: 200px;">Can I eat and drink normally with
+          aligners?</p>
+        <p class="faq-question faq-q abs" style="top: 8157.5px; left: 200px;">Are clear aligners noticeable?</p>
+        <p class="faq-question faq-q abs" style="top: 8241.5px; left: 200px;">Do I need to wear aligners all day?</p>
+
+        <div class="faq-plus abs" style="top: 7812px; left: 781px;">+</div>
+        <div class="faq-plus abs" style="top: 7944px; left: 781px;">+</div>
+        <div class="faq-plus abs" style="top: 8075px; left: 781px;">+</div>
+        <div class="faq-plus abs" style="top: 8159px; left: 781px;">+</div>
+        <div class="faq-plus abs" style="top: 8243px; left: 781px;">+</div>
+
+        <div class="contact-card abs" style="top: 7778px; left: 848px; width: 417px; height: 496px;"></div>
+        <img class="abs" style="top: 7808px; left: 917px; width: 280px; height: 229px;"
+          src="assets/figma/a2735cdb6d212d5ea214536d2bbd29e2370734d5.png" alt="" />
+        <p class="contact-title contact-title-figma abs" style="top: 8068px; left: 880px;">Have more questions ? Contact
+          Now</p>
+        <img class="icon contact-icon abs" style="top: 8098px; left: 880px;"
+          src="assets/figma/319996f8399d89e86246b0002469d9785f27800b.svg" alt="" />
+        <img class="icon contact-icon abs" style="top: 8139px; left: 880px;"
+          src="assets/figma/17ebe0d10b991b7f11f71476a7a61f9d1a1210af.svg" alt="" />
+        <p class="contact-link contact-link-figma abs" style="top: 8110.5px; left: 921px;">+91 7700950647</p>
+        <p class="contact-link contact-link-figma abs" style="top: 8150.5px; left: 921px;">queries@orthosquare.in</p>
+
+        <button class="cta-red cta-red-strip abs" style="top: 8194px; left: 880px; width: 354px; cursor:pointer;"
+          onclick="document.getElementById('free-visit-form').scrollIntoView({behavior:'smooth',block:'center'})">
+          <span class="cta-red-strip-text">Get Instant Callback</span>
+        </button>
+      </section>
+
+      <div class="badge-row abs" style="top: 868px;">
+        <div class="badge-row__card">
+          <img class="badge-row__icon" src="assets/figma/3b3fe7f94cd5057d7b446bbe37ae0dda44262f79.png" alt="" />
+          <p class="badge-row__title"><span class="badge-row__nowrap">20 Years</span></p>
+          <p class="badge-row__subtitle">Implant<br />Warranty</p>
+        </div>
+        <div class="badge-row__card">
+          <img class="badge-row__icon" src="assets/figma/91081631d52ce5b5d8e27ec325bcbe84d2bb9fc2.png" alt="" />
+          <p class="badge-row__title"><span class="badge-row__nowrap">1,50,000+</span></p>
+          <p class="badge-row__subtitle">Smiles<br />Aligned</p>
+        </div>
+        <div class="badge-row__card">
+          <img class="badge-row__icon" src="assets/figma/dadae1931fb7fd4e922d879cba46f0fffc0d048c.png" alt="" />
+          <p class="badge-row__title"><span class="badge-row__nowrap">20+ Years</span></p>
+          <p class="badge-row__subtitle">Industry<br />Experience</p>
+        </div>
+        <div class="badge-row__card">
+          <img class="badge-row__icon" src="assets/figma/62eb256b073111db9f99953f06c664ff7719504e.png" alt="" />
+          <p class="badge-row__title"><span class="badge-row__nowrap">125+ Clinics</span></p>
+          <p class="badge-row__subtitle">Across<br />India</p>
+        </div>
+        <div class="badge-row__card">
+          <img class="badge-row__icon" src="assets/figma/216360b55684f70fbc4b264d2774c3e03d3b6604.svg" alt="" />
+          <p class="badge-row__title"><span class="badge-row__nowrap">25,000+</span></p>
+          <p class="badge-row__subtitle">Google<br />Reviews</p>
+        </div>
+      </div>
+
+      <div class="cta-red abs hero-cta"
+        onclick="document.getElementById('free-visit-form').scrollIntoView({behavior:'smooth',block:'center'})"
+        style="cursor:pointer;">
+        <span>Get Free 3D Scanning &amp; Consultation</span>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-page-wrap">
+    <div class="mobile-page">
+      <!-- Mobile Hero Video -->
+      <div class="mobile-hero">
+        <video autoplay muted loop playsinline>
+          <source src="assets/hero-vid/hero_mob.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div class="mobile-top-cta"
+        onclick="document.getElementById('mobile-free-visit').scrollIntoView({behavior:'smooth',block:'center'})">
+        Get Free 3D Scanning
+      </div>
+
+      <p class="mobile-section-title mobile-watch-title">Thinking About Aligners? Watch This</p>
+      <div class="mobile-watch-card">
+        <iframe src="https://www.youtube.com/embed/bi5DDfC9Drs" 
+          title="Thinking About Aligners?" frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+
+      <div class="slider-carousel mobile-badge-carousel" aria-label="Key highlights" data-slider="mobile-badges"
+        data-card-w="165" data-gap="12" data-visible="2" style="top: 575px;">
+        <div class="slider-carousel__track">
+          <div class="slider-carousel__slide mobile-badge-slide">
+            <img class="mobile-mini-badge-icon" src="assets/figma/3b3fe7f94cd5057d7b446bbe37ae0dda44262f79.png"
+              alt="" />
+            <p class="mobile-mini-badge-value">20 Years</p>
+            <p class="mobile-mini-badge-label">Implant Warranty</p>
+          </div>
+          <div class="slider-carousel__slide mobile-badge-slide">
+            <img class="mobile-mini-badge-icon" src="assets/figma/91081631d52ce5b5d8e27ec325bcbe84d2bb9fc2.png"
+              alt="" />
+            <p class="mobile-mini-badge-value">1,50,000+</p>
+            <p class="mobile-mini-badge-label">Smiles Aligned</p>
+          </div>
+          <div class="slider-carousel__slide mobile-badge-slide">
+            <img class="mobile-mini-badge-icon" src="assets/figma/dadae1931fb7fd4e922d879cba46f0fffc0d048c.png"
+              alt="" />
+            <p class="mobile-mini-badge-value">20+ Years</p>
+            <p class="mobile-mini-badge-label">Industry Experience</p>
+          </div>
+          <div class="slider-carousel__slide mobile-badge-slide">
+            <img class="mobile-mini-badge-icon" src="assets/figma/62eb256b073111db9f99953f06c664ff7719504e.png"
+              alt="" />
+            <p class="mobile-mini-badge-value">125+ Clinics</p>
+            <p class="mobile-mini-badge-label">Across India</p>
+          </div>
+          <div class="slider-carousel__slide mobile-badge-slide">
+            <img class="mobile-mini-badge-icon" src="assets/figma/216360b55684f70fbc4b264d2774c3e03d3b6604.svg"
+              alt="" />
+            <p class="mobile-mini-badge-value">25,000+</p>
+            <p class="mobile-mini-badge-label">Google Reviews</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-form-card" id="mobile-free-visit"></div>
+      <p class="mobile-section-title mobile-form-title">Offering Free First Visit for Clear Aligners</p>
+      <form class="mobile-lead-form" id="mobile-lead-form">
+        <input class="mobile-input-box" style="top: 1193px;" type="text" placeholder="First Name"
+          aria-label="First Name" id="mob-form-first-name" required />
+        <input class="mobile-input-box" style="top: 1236px;" type="text" placeholder="Last Name"
+          aria-label="Last Name" id="mob-form-last-name" required />
+        <input class="mobile-input-box" style="top: 1279px;" type="email" placeholder="Email ID"
+          aria-label="Email ID" id="mob-form-email" required />
+        <input class="mobile-input-box" style="top: 1322px;" type="tel" placeholder="Contact Number"
+          aria-label="Contact Number" id="mob-form-phone" inputmode="tel" required />
+        <input class="mobile-input-box" style="top: 1365px;" type="text" placeholder="PIN Code"
+          aria-label="PIN Code" id="mob-form-pin" inputmode="numeric" pattern="[0-9]{6}" required />
+
+        <button class="mobile-form-cta" type="submit">
+          <span class="mobile-form-cta-text">Talk to an Aligner Expert</span>
+        </button>
+
+        <p id="mobile-form-msg"
+          style="position:absolute; top: 1456px; left: 50%; transform: translateX(-50%); width: 274px; text-align: center; font-size: 12px; display: none;">
+        </p>
+      </form>
+
+      <!-- Smile Problems Section -->
+      <p class="mob-smile-title">Smile Problems Clear Aligners Can Fix</p>
+      <p class="mob-smile-subtitle">Clear aligners gently correct common alignment and bite issues</p>
+
+      <p class="mob-smile-card-title" style="top: 1667.5px;">Crowded Teeth</p>
+      <div class="mob-smile-card" style="top: 1687px;"><img
+          src="assets/figma/90572afe41f44e4021e2ff513bbd6d8543bd92fe.png" alt="" /></div>
+      <p class="mob-smile-card-desc" style="top: 1881px;">When teeth look pushed together, overlap, or feel difficult to
+        clean properly.</p>
+      <div class="mob-pill" style="top: 1915px; left: 18px; width: 83px;"></div>
+      <div class="mob-pill" style="top: 1915px; left: 110px; width: 101px;"></div>
+      <p class="mob-pill-text" style="top: 1928.5px; left: 59.5px;">Too close</p>
+      <p class="mob-pill-text" style="top: 1928.5px; left: 160.5px;">Overlapping</p>
+
+      <p class="mob-smile-card-title mob-smile-card-title-left" style="top: 1972.5px;">Crossbite</p>
+      <div class="mob-smile-card" style="top: 1991px;"><img
+          src="assets/figma/c41925e9d4da0101bb06eb5a179795a4d1546a8b.png" alt="" /></div>
+      <p class="mob-smile-card-desc" style="top: 2185px;">When some upper teeth sit inside or behind the lower teeth
+        while biting.</p>
+      <div class="mob-pill" style="top: 2219px; left: 18px; width: 89px;"></div>
+      <div class="mob-pill" style="top: 2219px; left: 116px; width: 101px;"></div>
+      <p class="mob-pill-text" style="top: 2232.5px; left: 62.5px;">Misaligned</p>
+      <p class="mob-pill-text" style="top: 2232.5px; left: 166.5px;">Uneven Bite</p>
+
+      <p class="mob-smile-card-title mob-smile-card-title-left" style="top: 2276.5px;">Gapped Teeth</p>
+      <div class="mob-smile-card" style="top: 2295px;"><img
+          src="assets/figma/85eca10b4aabc80db579fbfa39c6332e79f48d0a.png" alt="" /></div>
+      <p class="mob-smile-card-desc" style="top: 2489px;">When there are noticeable gaps between teeth that make the
+        smile feel incomplete.</p>
+      <div class="mob-pill" style="top: 2523px; left: 18px; width: 83px;"></div>
+      <div class="mob-pill" style="top: 2523px; left: 110px; width: 83px;"></div>
+      <p class="mob-pill-text" style="top: 2536.5px; left: 59.5px;">Gaps</p>
+      <p class="mob-pill-text" style="top: 2536.5px; left: 151.5px;">Spaces</p>
+
+      <p class="mob-smile-card-title mob-smile-card-title-left" style="top: 2580.5px;">Open / Deep Bite</p>
+      <div class="mob-smile-card" style="top: 2599px;"><img
+          src="assets/figma/7cf60d5f5a4fdbecc82f9accae2c5264f0d81959.png" alt="" /></div>
+      <p class="mob-smile-card-desc" style="top: 2793px;">When front teeth don't meet properly or cover too much when
+        you close your mouth.</p>
+      <div class="mob-pill" style="top: 2827px; left: 18px; width: 83px;"></div>
+      <div class="mob-pill" style="top: 2827px; left: 110px; width: 101px;"></div>
+      <p class="mob-pill-text" style="top: 2840.5px; left: 59.5px;">Teeth Gap</p>
+      <p class="mob-pill-text" style="top: 2840.5px; left: 160.5px;">Over Bite</p>
+
+      <p class="mob-smile-card-title mob-smile-card-title-left" style="top: 2880.5px;">Spacing Issues</p>
+      <div class="mob-smile-card" style="top: 2899px;"><img
+          src="assets/figma/25eda52697b0771bf9107ca97468c64ca78610b6.png" alt="" /></div>
+      <p class="mob-smile-card-desc" style="top: 3093px;">When teeth are unevenly spaced and the smile looks irregular
+        or unbalanced.</p>
+      <div class="mob-pill" style="top: 3127px; left: 18px; width: 83px;"></div>
+      <div class="mob-pill" style="top: 3127px; left: 110px; width: 101px;"></div>
+      <p class="mob-pill-text" style="top: 3140.5px; left: 59.5px;">Uneven</p>
+      <p class="mob-pill-text" style="top: 3140.5px; left: 160.5px;">Irregular gap</p>
+
+      <div class="mob-smile-cta" style="top: 3190px;"
+        onclick="document.getElementById('mobile-free-visit').scrollIntoView({behavior:'smooth',block:'center'})">
+        See What Suits You Best
+      </div>
+
+      <p class="mobile-section-title mobile-discreet-title">Choose Orthosquare’s Discreet Smile Correction</p>
+      <div class="mobile-discreet-card"></div>
+      <img class="mobile-discreet-icon" src="assets/discreet-smile/straightens-teeth-11.png" alt="" />
+      <p class="mobile-discreet-card-title">Discreet &amp; Almost Invisible</p>
+      <div class="mobile-discreet-line-wrap"><img src="assets/figma/85303008-6f8f-47fa-b46f-73392b5e3601.svg" alt="" />
+      </div>
+      <p class="mobile-discreet-card-body">Clear aligners that straighten your teeth quietly - no metal, no wires, no
+        attention.</p>
+
+      <!-- Carousel decorative backgrounds -->
+      <div class="mobile-session2-bg mobile-session2-bg-top">
+        <img src="assets/figma/b211de8ce0c8d35552824c7e3742a56df3f1cf3b.svg" alt="" />
+      </div>
+      <div class="mobile-session2-bg mobile-session2-bg-bottom">
+        <img src="assets/figma/37e476f40b68a0b5173ee97642b3c5b6d787bd14.svg" alt="" />
+      </div>
+
+      <p class="mobile-session2-title mobile-changed-title">See How Clear Aligners Changed Lives</p>
+      <p class="mobile-session2-subtitle mobile-changed-subtitle">Stories from patients across 125+ clinics with
+        thousands of successful aligners</p>
+      <div class="slider-carousel mobile-slider-carousel mobile-yt-carousel" data-slider="mobile-top" data-card-w="243" data-gap="20"
+        data-visible="1" style="top: 3405px;">
+        <div class="slider-carousel__track">
+          <div class="slider-carousel__slide mobile-slide-yt"><iframe src="https://www.youtube.com/embed/oHsEwYx5L4w" title="Aligner Story 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="slider-carousel__slide mobile-slide-yt"><iframe src="https://www.youtube.com/embed/K6-HEJ-OkJ8" title="Aligner Story 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="slider-carousel__slide mobile-slide-yt"><iframe src="https://www.youtube.com/embed/iqbGYxB0KlE" title="Aligner Story 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="slider-carousel__slide mobile-slide-yt"><iframe src="https://www.youtube.com/embed/6JmvrsITMZc" title="Aligner Story 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="slider-carousel__slide mobile-slide-yt"><iframe src="https://www.youtube.com/embed/vUioINdiY5Q" title="Aligner Story 5" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="slider-carousel__slide mobile-slide-yt"><iframe src="https://www.youtube.com/embed/mOvM0pcyPBc" title="Aligner Story 6" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="slider-carousel__slide mobile-slide-yt"><iframe src="https://www.youtube.com/embed/tGXou-fW2t4" title="Aligner Story 7" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        </div>
+      </div>
+      <div class="mobile-carousel-nav mobile-carousel-nav-1">
+        <div class="mobile-carousel-dot">
+          <img src="assets/figma/8712fc6d-a98e-40a1-88e2-fbb94dcdc65e.svg" alt="" />
+        </div>
+        <div class="mobile-carousel-dot">
+          <img src="assets/figma/0a6d80bb-621d-473b-8e44-5e8230babac1.svg" alt="" />
+        </div>
+        <div class="mobile-carousel-arrow" data-slider-arrow="mobile-top" data-direction="prev">
+          <img src="assets/figma/2df8f0b9-d5e7-40d3-879c-a45076f68852.svg" alt="" />
+        </div>
+        <div class="mobile-carousel-arrow mobile-carousel-arrow-next" data-slider-arrow="mobile-top" data-direction="next">
+          <img src="assets/figma/c0e4e32b-ab8e-468a-afe7-3f8bf3f3cf71.svg" alt="" />
+        </div>
+      </div>
+
+      <p class="mobile-session2-title mobile-transform-title">50k+ Real Aligners Transformation</p>
+      <p class="mobile-session2-subtitle mobile-transform-subtitle">Documented results from 50k+ clear aligners
+        treatments</p>
+      <div class="slider-carousel mobile-slider-carousel" data-slider="mobile-bottom" data-card-w="243" data-gap="20"
+        data-visible="1" style="top: 4441px;">
+        <div class="slider-carousel__track">
+          <div class="slider-carousel__slide mobile-slide-img"><img src="assets/figma-carousel/base1.png" alt="" /></div>
+          <div class="slider-carousel__slide mobile-slide-img"><img src="assets/figma-carousel/base2.png" alt="" /></div>
+          <div class="slider-carousel__slide mobile-slide-img"><img src="assets/figma-carousel/aab1.png" alt="" /></div>
+          <div class="slider-carousel__slide mobile-slide-img"><img src="assets/figma-carousel/aab2.png" alt="" /></div>
+          <div class="slider-carousel__slide mobile-slide-img"><img src="assets/figma-carousel/aab3.png" alt="" /></div>
+          <div class="slider-carousel__slide mobile-slide-img"><img src="assets/figma-carousel/aab4.png" alt="" /></div>
+          <div class="slider-carousel__slide mobile-slide-img"><img src="assets/figma-carousel/aab5.png" alt="" /></div>
+        </div>
+      </div>
+      <div class="mobile-carousel-nav mobile-carousel-nav-2">
+        <div class="mobile-carousel-dot">
+          <img src="assets/figma/dee48b64-5676-4f8c-b636-ef1181813a19.svg" alt="" />
+        </div>
+        <div class="mobile-carousel-dot">
+          <img src="assets/figma/dee48b64-5676-4f8c-b636-ef1181813a19.svg" alt="" />
+        </div>
+        <div class="mobile-carousel-arrow" data-slider-arrow="mobile-bottom" data-direction="prev">
+          <img src="assets/figma/a9c82390-593e-4904-b526-439dd82d1386.svg" alt="" />
+        </div>
+        <div class="mobile-carousel-arrow mobile-carousel-arrow-next" data-slider-arrow="mobile-bottom" data-direction="next">
+          <img src="assets/figma/00199281-40ca-424d-8d95-2358029e329a.svg" alt="" />
+        </div>
+      </div>
+
+      <div class="mobile-pricing-strip"></div>
+      <p class="mobile-pricing-title">Quality Clear Aligners at Low Transparent Pricing</p>
+      <div class="mobile-pricing-download"
+        onclick="document.getElementById('mobile-free-visit').scrollIntoView({behavior:'smooth',block:'center'})">
+        Download Costing Details
+      </div>
+
+      <!-- Last Chance / Countdown Timer Section -->
+      <div class="mob-countdown-bg"></div>
+      <p class="mob-countdown-title">Last chance to avail Aligners Offer</p>
+      <p class="mob-countdown-subtitle">Limited-time savings on invisible aligners designed for faster, comfortable
+        results</p>
+
+      <div class="mob-countdown-digit" style="left: 18px;"><span id="mob-cd-h1">4</span></div>
+      <div class="mob-countdown-digit" style="left: 68px;"><span id="mob-cd-h2">8</span></div>
+      <p class="mob-countdown-sep" style="left: 128px;">:</p>
+      <div class="mob-countdown-digit" style="left: 139px;"><span id="mob-cd-m1">0</span></div>
+      <div class="mob-countdown-digit" style="left: 188px;"><span id="mob-cd-m2">0</span></div>
+      <p class="mob-countdown-sep" style="left: 248px;">:</p>
+      <div class="mob-countdown-digit" style="left: 259px;"><span id="mob-cd-s1">0</span></div>
+      <div class="mob-countdown-digit" style="left: 308px;"><span id="mob-cd-s2">0</span></div>
+
+      <div class="mob-countdown-cta"
+        onclick="document.getElementById('mobile-free-visit').scrollIntoView({behavior:'smooth',block:'center'})">
+        Begin Free Assessment
+      </div>
+
+      <script>
+        (function () {
+          var TOTAL_SECONDS = 48 * 60 * 60; // 48 hours
+          var remaining = TOTAL_SECONDS;
+
+          function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+
+          function updateDisplay() {
+            var h = Math.floor(remaining / 3600);
+            var m = Math.floor((remaining % 3600) / 60);
+            var s = remaining % 60;
+            var hStr = pad2(h), mStr = pad2(m), sStr = pad2(s);
+
+            document.getElementById('mob-cd-h1').textContent = hStr[0];
+            document.getElementById('mob-cd-h2').textContent = hStr[1];
+            document.getElementById('mob-cd-m1').textContent = mStr[0];
+            document.getElementById('mob-cd-m2').textContent = mStr[1];
+            document.getElementById('mob-cd-s1').textContent = sStr[0];
+            document.getElementById('mob-cd-s2').textContent = sStr[1];
+          }
+
+          function tick() {
+            remaining--;
+            if (remaining < 0) remaining = TOTAL_SECONDS; // loop back to 48h
+            updateDisplay();
+          }
+
+          updateDisplay();
+          setInterval(tick, 1000);
+        })();
+      </script>
+
+      <p class="mobile-session3-title">Your Trust, Our Biggest Achievement</p>
+
+      <!-- Mobile Review Carousel -->
+      <div class="mobile-review-carousel" data-slider="mobile-reviews" data-card-w="309" data-gap="20"
+        data-visible="1" style="top: 4928px;">
+        <div class="slider-carousel__track">
+          <!-- Card 1: Pramila Tandkar -->
+          <div class="mob-review-slide">
+            <div class="mob-review-slide__card">
+              <img class="mob-review-slide__quote" src="assets/reviews/quote.svg" alt="" />
+              <div class="mob-review-slide__text">Came here for my aligners and implant treatment. Service here is good. Staff is co-operative. Satisfied with my treatment.</div>
+              <div class="mob-review-slide__scroll-track"><div class="mob-review-slide__scroll-thumb"></div></div>
+            </div>
+            <div class="mob-review-slide__footer">
+              <img class="mob-review-slide__avatar" src="assets/figma/362b2d1f1cda6770e585c901bed7742f1e337545.svg" alt="" />
+              <span class="mob-review-slide__name">Pramila Tandkar</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Miloni Joshi -->
+          <div class="mob-review-slide">
+            <div class="mob-review-slide__card">
+              <img class="mob-review-slide__quote" src="assets/reviews/quote.svg" alt="" />
+              <div class="mob-review-slide__text">I had a great experience at Orthosquare for my aligner treatment. It was led by Dr Isha throughout and she is a very sweet and understanding doctor. She will explain everything in detail and will always be available for any queries.</div>
+              <div class="mob-review-slide__scroll-track"><div class="mob-review-slide__scroll-thumb"></div></div>
+            </div>
+            <div class="mob-review-slide__footer">
+              <img class="mob-review-slide__avatar" src="assets/figma/362b2d1f1cda6770e585c901bed7742f1e337545.svg" alt="" />
+              <span class="mob-review-slide__name">Miloni Joshi</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Shriyani Datta -->
+          <div class="mob-review-slide">
+            <div class="mob-review-slide__card">
+              <img class="mob-review-slide__quote" src="assets/reviews/quote.svg" alt="" />
+              <div class="mob-review-slide__text">Got my Invisalign treatment done with Dr. Rathi. The staff was very helpful in coordinating with me from a different city. Excellent service and very happy with the results from Dr. Rathi!</div>
+              <div class="mob-review-slide__scroll-track"><div class="mob-review-slide__scroll-thumb"></div></div>
+            </div>
+            <div class="mob-review-slide__footer">
+              <img class="mob-review-slide__avatar" src="assets/figma/362b2d1f1cda6770e585c901bed7742f1e337545.svg" alt="" />
+              <span class="mob-review-slide__name">Shriyani Datta</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Anoop Thomas -->
+          <div class="mob-review-slide">
+            <div class="mob-review-slide__card">
+              <img class="mob-review-slide__quote" src="assets/reviews/quote.svg" alt="" />
+              <div class="mob-review-slide__text">Absolutely loved the experience with Dr. Ridhi and her team. They have helped and guided me tremendously with my teeth alignment. The services and ambience made the entire experience a lovely one.</div>
+              <div class="mob-review-slide__scroll-track"><div class="mob-review-slide__scroll-thumb"></div></div>
+            </div>
+            <div class="mob-review-slide__footer">
+              <img class="mob-review-slide__avatar" src="assets/figma/362b2d1f1cda6770e585c901bed7742f1e337545.svg" alt="" />
+              <span class="mob-review-slide__name">Anoop Thomas</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Mahesh Kadam -->
+          <div class="mob-review-slide">
+            <div class="mob-review-slide__card">
+              <img class="mob-review-slide__quote" src="assets/reviews/quote.svg" alt="" />
+              <div class="mob-review-slide__text">Came here for my aligner treatment. I am satisfied with it. Orthosquare recommended for aligners.</div>
+              <div class="mob-review-slide__scroll-track"><div class="mob-review-slide__scroll-thumb"></div></div>
+            </div>
+            <div class="mob-review-slide__footer">
+              <img class="mob-review-slide__avatar" src="assets/figma/362b2d1f1cda6770e585c901bed7742f1e337545.svg" alt="" />
+              <span class="mob-review-slide__name">Mahesh Kadam</span>
+            </div>
+          </div>
+
+          <!-- Card 6: Mariamma Mathew -->
+          <div class="mob-review-slide">
+            <div class="mob-review-slide__card">
+              <img class="mob-review-slide__quote" src="assets/reviews/quote.svg" alt="" />
+              <div class="mob-review-slide__text">Iam Mariamma Mathew. I have done my implant with Orthosquare dental clinic at Vile parle east branch. I am happy with their treatment. Very good friendly atmosphere there. All the staff is very supportive.</div>
+              <div class="mob-review-slide__scroll-track"><div class="mob-review-slide__scroll-thumb"></div></div>
+            </div>
+            <div class="mob-review-slide__footer">
+              <img class="mob-review-slide__avatar" src="assets/figma/362b2d1f1cda6770e585c901bed7742f1e337545.svg" alt="" />
+              <span class="mob-review-slide__name">Mariamma Mathew</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Review Carousel Nav -->
+      <div class="mobile-carousel-nav mobile-carousel-nav-reviews">
+        <div class="mobile-carousel-arrow" data-slider-arrow="mobile-reviews" data-direction="prev">
+          <img src="assets/figma/a9c82390-593e-4904-b526-439dd82d1386.svg" alt="" />
+        </div>
+        <div class="mobile-carousel-arrow mobile-carousel-arrow-next" data-slider-arrow="mobile-reviews" data-direction="next">
+          <img src="assets/figma/00199281-40ca-424d-8d95-2358029e329a.svg" alt="" />
+        </div>
+      </div>
+
+      <div class="mobile-session4-bg"></div>
+      <p class="mobile-session4-title">Clear Aligners Made for Everyday Life</p>
+      <p class="mobile-session4-subtitle">A comfortable, step-by-step aligner treatment designed to straighten smile</p>
+
+      <img class="mobile-session4-icon mobile-session4-icon-mirror"
+        src="assets/figma/58173500-f58e-494a-92a5-b60329d3df6b.png" alt="" />
+      <p class="mobile-session4-item-title" style="top: 5453.5px; width: 147px;">Comfort You Can Live With</p>
+      <p class="mobile-session4-item-body" style="top: 5510px;">Smooth, removable aligners that let you eat, speak, and
+        smile naturally while your teeth gradually shift into place.</p>
+
+      <img class="mobile-session4-icon mobile-session4-icon-teeth"
+        src="assets/figma/f3177c59-cd2d-494c-ad0a-415e8e63a97c.png" alt="" />
+      <p class="mobile-session4-item-title" style="top: 5646.5px; width: 189px;">Flexible Options for Every Smile</p>
+      <p class="mobile-session4-item-body" style="top: 5703px;">Multiple aligner plans are available, so you can choose
+        what suits your dental needs, timeline, and budget.</p>
+
+      <img class="mobile-session4-icon mobile-session4-icon-appointment"
+        src="assets/figma/786798ec-8d0a-439f-8064-9676a9b55246.png" alt="" />
+      <p class="mobile-session4-item-title" style="top: 5839.5px; width: 189px;">Expert-Planned, Fully Guided</p>
+      <p class="mobile-session4-item-body" style="top: 5896px;">Every step is carefully planned using digital scans to
+        ensure safety, comfort, and confidence.</p>
+
+      <img class="mobile-session5-image" src="assets/figma/4ed37c82-0117-4c48-acde-514970f39f08.png" alt="" />
+      <div class="mobile-session5-cta-bg"></div>
+      <p class="mobile-session5-cta-text">Get the smile you always wished for, talk to our experts now at NO COST</p>
+      <div class="mobile-session5-cta-btn"
+        onclick="document.getElementById('mobile-free-visit').scrollIntoView({behavior:'smooth',block:'center'})">
+        Take Your First Step Today
+      </div>
+
+      <p class="mobile-session6-title">Your Dental Concerns, Solved Simply</p>
+
+      <div class="mobile-session6-tab mobile-session6-tab-outline">
+        <span>What You Feel</span>
+      </div>
+
+      <div class="mobile-session6-card" style="top: 6496px;"></div>
+      <div class="mobile-session6-card" style="top: 6738px;"></div>
+
+      <div class="mobile-session6-tab mobile-session6-tab-filled">
+        <span>How Aligners Help</span>
+      </div>
+
+      <img class="mobile-session6-arrow" src="assets/figma/ff5f426a-2ca3-4d9e-a704-eb2c0c16ac85.svg" alt="" />
+
+      <img class="mobile-session6-hand" style="top: 6510px;" src="assets/figma/d5222600-b8d0-4d4a-8831-73239bad8c6d.svg"
+        alt="" />
+      <img class="mobile-session6-hand" style="top: 6534px;" src="assets/figma/d5222600-b8d0-4d4a-8831-73239bad8c6d.svg"
+        alt="" />
+      <img class="mobile-session6-hand" style="top: 6558px;" src="assets/figma/d5222600-b8d0-4d4a-8831-73239bad8c6d.svg"
+        alt="" />
+      <img class="mobile-session6-hand" style="top: 6582px;" src="assets/figma/d5222600-b8d0-4d4a-8831-73239bad8c6d.svg"
+        alt="" />
+      <img class="mobile-session6-hand" style="top: 6606px;" src="assets/figma/d5222600-b8d0-4d4a-8831-73239bad8c6d.svg"
+        alt="" />
+
+      <p class="mobile-session6-text" style="top: 6520px;">Conscious about smiling</p>
+      <p class="mobile-session6-text" style="top: 6544px;">Crooked or uneven teeth</p>
+      <p class="mobile-session6-text" style="top: 6568px;">Don’t want visible braces</p>
+      <p class="mobile-session6-text" style="top: 6592px;">Discomfort while talking</p>
+      <p class="mobile-session6-text" style="top: 6616px;">Gradual, visible improvement</p>
+
+      <img class="mobile-session6-hand" style="top: 6752px;" src="assets/figma/ae934e3f-ea60-4c0d-900a-5dd873e5ad2f.svg"
+        alt="" />
+      <img class="mobile-session6-hand" style="top: 6776px;" src="assets/figma/ae934e3f-ea60-4c0d-900a-5dd873e5ad2f.svg"
+        alt="" />
+      <img class="mobile-session6-hand" style="top: 6800px;" src="assets/figma/ae934e3f-ea60-4c0d-900a-5dd873e5ad2f.svg"
+        alt="" />
+      <img class="mobile-session6-hand" style="top: 6824px;" src="assets/figma/ae934e3f-ea60-4c0d-900a-5dd873e5ad2f.svg"
+        alt="" />
+      <img class="mobile-session6-hand" style="top: 6848px;" src="assets/figma/ae934e3f-ea60-4c0d-900a-5dd873e5ad2f.svg"
+        alt="" />
+
+      <p class="mobile-session6-text" style="top: 6762px;">Nearly invisible while you wear</p>
+      <p class="mobile-session6-text" style="top: 6786px;">Comfortable for everyday life</p>
+      <p class="mobile-session6-text" style="top: 6810px;">Removable for eating &amp; brushing</p>
+      <p class="mobile-session6-text" style="top: 6834px;">A natural-looking, confident smile</p>
+      <p class="mobile-session6-text" style="top: 6858px;">High Success &amp; Full Safety</p>
+
+      <div class="mobile-session7-banner">
+        <div class="mobile-session7-banner-img">
+          <img src="assets/figma/381dc3c8-6c73-451a-b476-02ced9bdc62f.png" alt="" />
+        </div>
+      </div>
+      <p class="mobile-session7-banner-title">Recognized For Exceptional Aligners Expertise</p>
+
+      <div class="mobile-session7-wave">
+        <img src="assets/figma/f3d589e6-fc14-4f2f-aa22-98cdd4197bdd.png" alt="" />
+      </div>
+      <div class="mobile-session7-award-circle">
+        <img src="assets/figma/1df44e20-7054-44bb-9e4d-1bca5e1127b2.svg" alt="" />
+      </div>
+      <div class="mobile-session7-award-img">
+        <img src="assets/figma/a717f68603bdfcbf47ab660825cfc6e725c0aff3.png" alt="" />
+      </div>
+
+      <div class="mobile-session7-strip"></div>
+      <p class="mobile-session7-subtitle">Leading Dental Chain of the Year - West</p>
+      <p class="mobile-session7-body">This recognition reflects our commitment to consistent, high-quality dental care
+        across the nation. With experienced specialists, advanced technology, and transparent practices, we continue to
+        earn the trust of thousands of patients every year.</p>
+
+      <div class="mobile-session8-bg"></div>
+      <p class="mobile-session8-title">Got Doubts ?</p>
+      <p class="mobile-session8-subtitle">We’ve Got All Answers</p>
+
+      <div class="mobile-session8-faq-card" style="top: 7740px; height: 107px;"></div>
+      <div class="mobile-session8-faq-card" style="top: 7852px; height: 107px;"></div>
+      <div class="mobile-session8-faq-card" style="top: 7964px; height: 47px;"></div>
+      <div class="mobile-session8-faq-card" style="top: 8016px; height: 47px;"></div>
+      <div class="mobile-session8-faq-card" style="top: 8068px; height: 47px;"></div>
+
+      <p class="mobile-session8-faq-q" style="top: 7765.5px; width: 190px;">Are clear aligners painful?</p>
+      <p class="mobile-session8-faq-a" style="top: 7805.5px;">Aligners may cause mild pressure for a day or two when you
+        switch to a new set, which means they’re working.</p>
+
+      <p class="mobile-session8-faq-q" style="top: 7876.5px; width: 321px;">How long does aligner treatment take?</p>
+      <p class="mobile-session8-faq-a" style="top: 7917.5px;">Treatment time varies based on your case, you see
+        noticeable results within a few months, with full treatment typically lasting 6–12 months.</p>
+
+      <p class="mobile-session8-faq-q" style="top: 7988.5px; width: 321px;">Can I eat and drink normally with aligners?
+      </p>
+      <p class="mobile-session8-faq-q" style="top: 8040.5px; width: 321px;">Are clear aligners noticeable?</p>
+      <p class="mobile-session8-faq-q" style="top: 8092.5px; width: 321px;">Do I need to wear aligners all day?</p>
+
+      <div class="mobile-session8-plus" style="top: 7765.5px;">+</div>
+      <div class="mobile-session8-plus" style="top: 7876.5px; left: 350px;">+</div>
+      <div class="mobile-session8-plus" style="top: 7988.5px;">+</div>
+      <div class="mobile-session8-plus" style="top: 8040.5px;">+</div>
+      <div class="mobile-session8-plus" style="top: 8092.5px;">+</div>
+
+      <div class="mobile-session8-contact-card"></div>
+      <img class="mobile-session8-contact-img" src="assets/figma/c4934292-688e-400c-95d8-f2d662f72b92.png" alt="" />
+      <p class="mobile-session8-contact-title">Have more questions ? Contact Now</p>
+
+      <img class="mobile-session8-contact-icon" style="top: 8328px;"
+        src="assets/figma/e013b57c-46cb-49f8-b318-a6b9da1bcf80.svg" alt="" />
+      <p class="mobile-session8-contact-link" style="top: 8341px;">+91 7700950647</p>
+
+      <img class="mobile-session8-contact-icon" style="top: 8356px;"
+        src="assets/figma/a661314d-a3a1-474c-8d5a-4263245e60d0.svg" alt="" />
+      <p class="mobile-session8-contact-link" style="top: 8368px;">queries@orthosquare.com</p>
+
+      <div class="mobile-session8-contact-cta"
+        onclick="document.getElementById('mobile-free-visit').scrollIntoView({behavior:'smooth',block:'center'})">
+        Get Instant Callback
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var AUTO_INTERVAL = 3000;
+      var TRANSITION_MS = 600;
+
+      var sliders = {};
+
+      document.querySelectorAll('[data-slider]').forEach(function (el) {
+        var name = el.getAttribute('data-slider');
+        var track = el.querySelector('.slider-carousel__track');
+        var realCount = track.children.length;
+
+        // Per-carousel config via data attributes (with defaults for image carousels)
+        var cardW = parseInt(el.getAttribute('data-card-w')) || 301;
+        var gap = parseInt(el.getAttribute('data-gap')) || 31;
+        var visible = parseInt(el.getAttribute('data-visible')) || 2;
+        var step = cardW + gap;
+
+        // Clone first 'visible' slides and append for seamless forward loop
+        for (var i = 0; i < visible; i++) {
+          var clone = track.children[i].cloneNode(true);
+          track.appendChild(clone);
+        }
+
+        sliders[name] = {
+          track: track,
+          current: 0,
+          realCount: realCount,
+          timer: null,
+          busy: false
+        };
+
+        function setPos(index, animate) {
+          if (animate) {
+            track.style.transition = 'transform ' + TRANSITION_MS + 'ms cubic-bezier(0.25, 0.1, 0.25, 1)';
+          } else {
+            track.style.transition = 'none';
+          }
+          track.style.transform = 'translateX(-' + (index * step) + 'px)';
+          if (!animate) track.offsetHeight; // force reflow
+        }
+
+        function slideTo(index) {
+          var s = sliders[name];
+          if (s.busy) return;
+
+          if (index >= realCount) {
+            // Forward wrap: animate to position realCount (clone zone = same as pos 0)
+            s.busy = true;
+            setPos(realCount, true);
+            setTimeout(function () {
+              // Snap back to position 0 (visually identical)
+              setPos(0, false);
+              s.current = 0;
+              requestAnimationFrame(function () {
+                track.style.transition = 'transform ' + TRANSITION_MS + 'ms cubic-bezier(0.25, 0.1, 0.25, 1)';
+                s.busy = false;
+              });
+            }, TRANSITION_MS + 50);
+          } else if (index < 0) {
+            // Backward wrap: jump to realCount (looks like pos 0), then slide to last real position
+            s.busy = true;
+            setPos(realCount, false); // instant jump (visually = position 0)
+            requestAnimationFrame(function () {
+              setPos(realCount - 1, true); // smooth slide backward to last position
+              s.current = realCount - 1;
+              setTimeout(function () { s.busy = false; }, TRANSITION_MS + 50);
+            });
+          } else {
+            s.current = index;
+            setPos(index, true);
+          }
+        }
+
+        function advance() {
+          slideTo(sliders[name].current + 1);
+        }
+
+        function startAuto() {
+          clearInterval(sliders[name].timer);
+          sliders[name].timer = setInterval(advance, AUTO_INTERVAL);
+        }
+
+        sliders[name].slideTo = slideTo;
+        sliders[name].startAuto = startAuto;
+
+        startAuto();
+      });
+
+      // Arrow clicks
+      document.querySelectorAll('[data-slider-arrow]').forEach(function (arrow) {
+        arrow.addEventListener('click', function () {
+          var name = arrow.getAttribute('data-slider-arrow');
+          var dir = arrow.getAttribute('data-direction') === 'next' ? 1 : -1;
+          var s = sliders[name];
+          s.slideTo(s.current + dir);
+          s.startAuto();
+        });
+      });
+    })();
+  </script>
+
+  <!-- Review scrollbar thumb sync -->
+  <script>
+    (function () {
+      var TRACK_H = 120;
+      var THUMB_H = 38;
+      var MAX_OFFSET = TRACK_H - THUMB_H; // 82px travel
+
+      document.querySelectorAll('.review-slide__text').forEach(function (textEl) {
+        var card = textEl.closest('.review-slide__card');
+        if (!card) return;
+
+        textEl.addEventListener('scroll', function () {
+          var maxScroll = textEl.scrollHeight - textEl.clientHeight;
+          if (maxScroll <= 0) return;
+          var pct = textEl.scrollTop / maxScroll;
+          var offset = Math.round(pct * MAX_OFFSET);
+          card.style.setProperty('--thumb-offset', offset + 'px');
+        });
+      });
+    })();
+  </script>
+
+  <!-- Responsive page scaling for desktop layout -->
+  <script>
+    (function () {
+      var page = document.querySelector('.page');
+      var wrap = document.querySelector('.page-wrap');
+      if (!page || !wrap) return;
+
+      var PAGE_W = 1440;
+      var PAGE_H = 8346;
+
+      function scalePage() {
+        var vw = document.documentElement.clientWidth;
+
+        // Large desktop (>1440px) — CSS breakpoint handles full-width
+        // Mobile (≤768px) — CSS media query switches to mobile layout
+        if (vw > PAGE_W || vw <= 768) {
+          page.style.transform = 'none';
+          page.style.left = '';
+          wrap.style.height = '';
+          page.style.setProperty('--page-scale', '1');
+          return;
+        }
+
+        // Laptop / medium desktop (769px–1440px) — scale down
+        var s = vw / PAGE_W;
+        page.style.setProperty('--page-scale', s);
+        page.style.transform = 'scale(' + s + ')';
+        page.style.left = ((vw - PAGE_W * s) / 2) + 'px';
+        wrap.style.height = (PAGE_H * s) + 'px';
+      }
+
+      scalePage();
+      window.addEventListener('resize', scalePage);
+      window.addEventListener('load', scalePage);
+    })();
+  </script>
+
+  <!-- Mobile page scaling for phones < 375px -->
+  <script>
+    (function () {
+      var mobilePage = document.querySelector('.mobile-page');
+      var mobileWrap = document.querySelector('.mobile-page-wrap');
+      if (!mobilePage || !mobileWrap) return;
+
+      function scaleMobile() {
+        var vw = window.innerWidth;
+        if (vw >= 375 || vw > 768) {
+          mobilePage.style.transform = 'none';
+          mobilePage.style.left = '';
+          mobilePage.style.margin = '0 auto';
+          mobileWrap.style.height = '';
+          return;
+        }
+        var s = vw / 375;
+        mobilePage.style.margin = '0';
+        mobilePage.style.transform = 'scale(' + s + ')';
+        mobilePage.style.left = ((vw - 375 * s) / 2) + 'px';
+        mobileWrap.style.height = (mobilePage.scrollHeight * s) + 'px';
+      }
+
+      scaleMobile();
+      window.addEventListener('resize', scaleMobile);
+      window.addEventListener('load', scaleMobile);
+    })();
+  </script>
+</body>
+
+</html>
