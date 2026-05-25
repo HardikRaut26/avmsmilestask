@@ -46,35 +46,51 @@
 
       <!-- ═══ FEATURES SECTION ═══ -->
       <section aria-label="Features">
-        <h1 class="hind-36 center-title abs" style="top: 1118px; letter-spacing: -0.36px;">Clear Aligners Made for
-          Everyday Life</h1>
-        <h2 class="helv-28 center-subtitle abs visually-hidden-heading" style="top: 1207px;">A comfortable, step-by-step
-          aligner treatment designed to straighten your smile</h2>
+        <div class="features-block">
+          <div class="features-header">
+            <h1 class="hind-36 center-title abs" style="top: 1118px; letter-spacing: -0.36px;">Clear Aligners Made for
+              Everyday Life</h1>
+            <h2 class="helv-28 center-subtitle abs visually-hidden-heading" style="top: 1207px;">A comfortable,
+              step-by-step
+              aligner treatment designed to straighten your smile</h2>
+          </div>
 
-        <img class="feature-icon abs" style="top: 1351px; left: 326px; width: 50px; height: 50px;"
-          src="assets/figma/43330f50f96800a781184dccf712953258ce845c.png" alt="" />
-        <img class="feature-icon abs" style="top: 1351px; left: 1062px; width: 53px; height: 53px;"
-          src="assets/figma/193df54be3f49a5f4e52da675564256a6065ae72.png" alt="" />
-        <img class="feature-icon abs" style="top: 1620px; left: 693px; width: 53px; height: 53px;"
-          src="assets/figma/ef312a63ad8804b4052ac56cc4db0eb6d8749355.png" alt="" />
+          <div class="features-grid">
+            <div class="feature-item">
+              <img class="feature-icon abs" style="top: 1351px; left: 326px; width: 50px; height: 50px;"
+                src="assets/figma/43330f50f96800a781184dccf712953258ce845c.png" alt="" />
+              <p class="feature-title abs" style="top: 1450.5px; left: 350.5px; width: 177px;">Comfort You Can Live With
+              </p>
+              <p class="feature-desc abs" style="top: 1514px; left: 351px; width: 352px;">Smooth, removable aligners that
+                let
+                you eat, speak, and smile naturally while your teeth gradually shift into place.</p>
+            </div>
+            <div class="feature-item">
+              <img class="feature-icon abs" style="top: 1351px; left: 1062px; width: 53px; height: 53px;"
+                src="assets/figma/193df54be3f49a5f4e52da675564256a6065ae72.png" alt="" />
+              <p class="feature-title feature-title-poppins abs" style="top: 1450.5px; left: 1088.5px; width: 231px;">
+                Expert-Planned, Fully Guided</p>
+              <p class="feature-desc abs" style="top: 1513px; left: 1089px; width: 352px;">Every step is carefully
+                planned
+                using digital scans to ensure safety, comfort, and confidence.</p>
+            </div>
+            <div class="feature-item">
+              <img class="feature-icon abs" style="top: 1620px; left: 693px; width: 53px; height: 53px;"
+                src="assets/figma/ef312a63ad8804b4052ac56cc4db0eb6d8749355.png" alt="" />
+              <p class="feature-title abs" style="top: 1721.5px; left: 719.5px; width: 227px;">Flexible Options for Every
+                Smile</p>
+              <p class="feature-desc abs" style="top: 1784px; left: 720px; width: 352px;">Multiple aligner plans are
+                available, so you can choose what suits your dental needs, timeline, and budget.</p>
+            </div>
+          </div>
 
-        <p class="feature-title abs" style="top: 1450.5px; left: 350.5px; width: 177px;">Comfort You Can Live With</p>
-        <p class="feature-title feature-title-poppins abs" style="top: 1450.5px; left: 1088.5px; width: 231px;">
-          Expert-Planned, Fully Guided</p>
-        <p class="feature-title abs" style="top: 1721.5px; left: 719.5px; width: 227px;">Flexible Options for Every
-          Smile</p>
-
-        <p class="feature-desc abs" style="top: 1514px; left: 351px; width: 352px;">Smooth, removable aligners that let
-          you eat, speak, and smile naturally while your teeth gradually shift into place.</p>
-        <p class="feature-desc abs" style="top: 1513px; left: 1089px; width: 352px;">Every step is carefully planned
-          using digital scans to ensure safety, comfort, and confidence.</p>
-        <p class="feature-desc abs" style="top: 1784px; left: 720px; width: 352px;">Multiple aligner plans are
-          available, so you can choose what suits your dental needs, timeline, and budget.</p>
-
-        <div class="feature-card abs" id="free-visit-form" style="top: 1899px;"></div>
-        <h2 class="hind-36 center-title abs"
-          style="top: 1939px; width: 882px; letter-spacing: -0.36px; white-space: normal;">Offering Free
-          First Visit for Clear Aligners</h2>
+          <div class="features-offer">
+            <div class="feature-card abs" id="free-visit-form" style="top: 1899px;"></div>
+            <h2 class="hind-36 center-title abs"
+              style="top: 1939px; width: 882px; letter-spacing: -0.36px; white-space: normal;">Offering Free
+              First Visit for Clear Aligners</h2>
+          </div>
+        </div>
       </section>
 
       <!-- ═══ LEAD FORM SECTION ═══ -->
@@ -1467,18 +1483,21 @@
       function scalePage() {
         var vw = document.documentElement.clientWidth;
 
-        // Large desktop (>1440px) — CSS breakpoint handles full-width
-        // Mobile (≤768px) — CSS media query switches to mobile layout
-        if (vw > PAGE_W || vw <= 767) {
+        // Mobile (≤767px) — CSS media query switches to mobile layout
+        if (vw <= 767) {
           page.style.transform = 'none';
           page.style.left = '';
+          page.style.margin = '';
           wrap.style.height = '';
           page.style.setProperty('--page-scale', '1');
           return;
         }
 
-        // Laptop / medium desktop (769px–1440px) — scale down
-        var s = vw / PAGE_W;
+        // Laptop / medium / large desktop (768px–2560px) — scale down or up
+        // For screen widths > 2560px, we cap scaling at 2560px
+        var targetW = Math.min(vw, 2560);
+        var s = targetW / PAGE_W;
+        page.style.margin = '0';
         page.style.setProperty('--page-scale', s);
         page.style.transform = 'scale(' + s + ')';
         page.style.left = ((vw - PAGE_W * s) / 2) + 'px';

@@ -200,7 +200,7 @@ input.input-box:focus {
 }
 
 /* ─── Large screens: keep page centered at 1440px, break out full-width elements ─── */
-@media (min-width: 1441px) {
+@media (min-width: 99999px) { /* Disabled to prevent conflicts with JS scale transform which scales up to 2560px */
   /* Allow full-width breakout elements */
   .page-wrap {
     overflow: visible !important;
@@ -232,6 +232,97 @@ input.input-box:focus {
   .cta-banner-text-centered {
     transform: translateY(-50%);
   }
+
+  /* ─── Features Block ─── */
+  .features-block {
+    position: absolute;
+    top: 1080px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1680px, calc(100% - 160px));
+  }
+
+  .features-block .abs {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+  }
+
+  .features-header {
+    text-align: center;
+    display: grid;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  .features-header .center-title,
+  .features-header .center-subtitle {
+    transform: none !important;
+    width: auto;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    margin: 24px 0 56px;
+  }
+
+  .feature-item {
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .feature-item .feature-title,
+  .feature-item .feature-desc {
+    transform: none !important;
+    width: 100% !important;
+    max-width: 360px;
+  }
+
+  .features-offer {
+    display: grid;
+    justify-items: center;
+    gap: 16px;
+  }
+
+  .features-offer .feature-card {
+    width: min(1200px, 100%);
+    height: 360px;
+  }
+
+  .features-offer .hind-36 {
+    max-width: 900px;
+    text-align: center;
+  }
+
+  /* ─── CTA Strips: extend full-width ─── */
+  .cta-strip {
+    width: 100vw;
+    left: 50% !important;
+    transform: translateX(-50%);
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .cta-strip-title-centered {
+    left: calc(50% - 720px + 224px) !important;
+  }
+
+  .cta-red-strip {
+    /* Keep CTA buttons inside the centered 1440px area */
+  }
+
+  /* ─── Recognized Section: wave and elements extend properly ─── */
+  .recognized-wave {
+    left: calc(50% - 720px - 98px) !important;
+  }
+
+  /* ─── FAQ/Contact background: extend full width ─── */
+
 }
 
 .hero-image img {
