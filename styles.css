@@ -34,6 +34,102 @@ body {
   font-family: Helvetica, Arial, sans-serif;
 }
 
+body.is-loading {
+  overflow: hidden;
+}
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 32px 20px;
+  background: #f7f9ff;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.page-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.page-loader__panel {
+  width: min(1100px, 100%);
+}
+
+.page-loader__bar {
+  height: 240px;
+  border-radius: 18px;
+  margin-bottom: 24px;
+}
+
+.page-loader__row {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.page-loader__row--wide {
+  margin-top: 8px;
+}
+
+.page-loader__line {
+  height: 20px;
+  border-radius: 999px;
+}
+
+.page-loader__line--short {
+  width: 60%;
+}
+
+.page-loader__line--medium {
+  width: 80%;
+}
+
+.page-loader__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 26px;
+}
+
+.page-loader__card {
+  height: 140px;
+  border-radius: 14px;
+}
+
+.page-loader__shim {
+  background: linear-gradient(100deg, #e7ebf6 20%, #f7f9ff 40%, #e7ebf6 60%);
+  background-size: 200% 100%;
+  animation: shimmer 1.1s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-loader {
+    padding: 20px 14px;
+  }
+
+  .page-loader__bar {
+    height: 180px;
+  }
+
+  .page-loader__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* Semantic elements: don't break absolute layout */
 section {
   position: static;
@@ -2878,7 +2974,7 @@ input.mobile-input-box:focus {
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .page-wrap {
     display: none;
   }
@@ -2887,6 +2983,16 @@ input.mobile-input-box:focus {
     display: block;
     width: 100%;
     overflow: hidden;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .page-wrap {
+    display: block;
+  }
+
+  .mobile-page-wrap {
+    display: none;
   }
 }
 

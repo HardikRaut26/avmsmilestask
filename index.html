@@ -13,7 +13,25 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<body class="is-loading">
+  <div id="page-loader" class="page-loader" aria-hidden="true">
+    <div class="page-loader__panel">
+      <div class="page-loader__bar page-loader__shim"></div>
+      <div class="page-loader__row">
+        <div class="page-loader__line page-loader__shim"></div>
+        <div class="page-loader__line page-loader__line--short page-loader__shim"></div>
+      </div>
+      <div class="page-loader__grid">
+        <div class="page-loader__card page-loader__shim"></div>
+        <div class="page-loader__card page-loader__shim"></div>
+        <div class="page-loader__card page-loader__shim"></div>
+      </div>
+      <div class="page-loader__row page-loader__row--wide">
+        <div class="page-loader__line page-loader__shim"></div>
+        <div class="page-loader__line page-loader__line--medium page-loader__shim"></div>
+      </div>
+    </div>
+  </div>
   <div class="page-wrap">
     <div class="page">
       <!-- ═══ HERO SECTION ═══ -->
@@ -1451,7 +1469,7 @@
 
         // Large desktop (>1440px) — CSS breakpoint handles full-width
         // Mobile (≤768px) — CSS media query switches to mobile layout
-        if (vw > PAGE_W || vw <= 768) {
+        if (vw > PAGE_W || vw <= 767) {
           page.style.transform = 'none';
           page.style.left = '';
           wrap.style.height = '';
@@ -1482,7 +1500,7 @@
 
       function scaleMobile() {
         var vw = window.innerWidth;
-        if (vw >= 375 || vw > 768) {
+        if (vw >= 375 || vw > 767) {
           mobilePage.style.transform = 'none';
           mobilePage.style.left = '';
           mobilePage.style.margin = '0 auto';
@@ -1499,6 +1517,25 @@
       scaleMobile();
       window.addEventListener('resize', scaleMobile);
       window.addEventListener('load', scaleMobile);
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var loader = document.getElementById('page-loader');
+      if (!loader) return;
+
+      function hideLoader() {
+        if (loader.classList.contains('hidden')) return;
+        loader.classList.add('hidden');
+        document.body.classList.remove('is-loading');
+        setTimeout(function () {
+          if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+        }, 500);
+      }
+
+      window.addEventListener('load', hideLoader);
+      setTimeout(hideLoader, 6000);
     })();
   </script>
 </body>
